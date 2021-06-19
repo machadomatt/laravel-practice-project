@@ -8,7 +8,13 @@ class WebController extends Controller
 {
     public function index()
     {
-        return view('front.index');
+        $metatags = $this->seo->render(
+            env('APP_NAME') . ' - Laravel + Bootstrap 5',
+            'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi fuga ratione, fugit sapiente ab maxime!',
+            url('/'),
+            'https://dummyimage.com/1280x720/343a40/6c757d'
+        );
+        return view('front.index', ['metatags' => $metatags]);
     }
 
     public function about()
