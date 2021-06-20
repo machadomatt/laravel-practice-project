@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -14,7 +15,10 @@ class WebController extends Controller
             url('/'),
             'https://dummyimage.com/1280x720/343a40/6c757d'
         );
-        return view('front.index', ['metatags' => $metatags]);
+
+        $posts = Post::orderBy('published_at', 'DESC')->limit(3)->get();
+
+        return view('front.index', ['metatags' => $metatags, 'posts' => $posts]);
     }
 
     public function about()

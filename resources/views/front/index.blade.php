@@ -22,7 +22,8 @@
                     </div>
                 </div>
                 <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5"
-                        src="https://dummyimage.com/600x400/343a40/6c757d" alt="..." /></div>
+                        src="{{ Storage::url(Cropper::thumb('images/image-3.jpg', 600, 400)) }}" alt="Laravel + Bootstrap 5"
+                        width="600" height="400" loading="lazy" /></div>
             </div>
         </div>
     </header>
@@ -103,83 +104,37 @@
                 </div>
             </div>
             <div class="row gx-5">
-                <div class="col-lg-4 mb-5">
-                    <div class="card h-100 shadow border-0">
-                        <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
-                        <div class="card-body p-4">
-                            <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                            <a class="text-decoration-none link-dark stretched-link" href="{{ route('post', 'welcome-to-blog-post') }}">
-                                <h5 class="card-title mb-3">Blog post title</h5>
-                            </a>
-                            <p class="card-text mb-0">Some quick example text to build on the card title and make up the
-                                bulk of the card's content.</p>
-                        </div>
-                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                            <div class="d-flex align-items-end justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d"
-                                        alt="..." />
-                                    <div class="small">
-                                        <div class="fw-bold">Kelly Rowan</div>
-                                        <div class="text-muted">March 12, 2021 &middot; 6 min read</div>
+                @foreach ($posts as $post)
+                    <div class="col-lg-4 mb-5">
+                        <div class="card h-100 shadow border-0">
+                            <img class="card-img-top h-auto"
+                                src="{{ Storage::url(Cropper::thumb($post->image, 600, 350)) }}"
+                                alt="{{ $post->title }}" loading="lazy" width="600" height="350" />
+                            <div class="card-body p-4">
+                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ $post->category }}</div>
+                                <a class="text-decoration-none link-dark stretched-link"
+                                    href="{{ route('post', $post->slug) }}">
+                                    <h5 class="card-title mb-3">{{ $post->title }}</h5>
+                                </a>
+                                <p class="card-text mb-0">{{ $post->excerpt }}</p>
+                            </div>
+                            <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
+                                <div class="d-flex align-items-end justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d"
+                                            alt="{{ $post->author }}" />
+                                        <div class="small">
+                                            <div class="fw-bold">{{ $post->author()->get()->first()->name }}</div>
+                                            <div class="text-muted">
+                                                {{ date('F j, Y', strtotime($post->published_at)) }} &middot;
+                                                {{ $post->reading_time }} min read</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-4 mb-5">
-                    <div class="card h-100 shadow border-0">
-                        <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
-                        <div class="card-body p-4">
-                            <div class="badge bg-primary bg-gradient rounded-pill mb-2">Media</div>
-                            <a class="text-decoration-none link-dark stretched-link" href="{{ route('post', 'welcome-to-blog-post') }}">
-                                <h5 class="card-title mb-3">Another blog post title</h5>
-                            </a>
-                            <p class="card-text mb-0">This text is a bit longer to illustrate the adaptive height of each
-                                card. Some quick example text to build on the card title and make up the bulk of the card's
-                                content.</p>
-                        </div>
-                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                            <div class="d-flex align-items-end justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d"
-                                        alt="..." />
-                                    <div class="small">
-                                        <div class="fw-bold">Josiah Barclay</div>
-                                        <div class="text-muted">March 23, 2021 &middot; 4 min read</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 mb-5">
-                    <div class="card h-100 shadow border-0">
-                        <img class="card-img-top" src="https://dummyimage.com/600x350/6c757d/343a40" alt="..." />
-                        <div class="card-body p-4">
-                            <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                            <a class="text-decoration-none link-dark stretched-link" href="{{ route('post', 'welcome-to-blog-post') }}">
-                                <h5 class="card-title mb-3">The last blog post title is a little bit longer than the others
-                                </h5>
-                            </a>
-                            <p class="card-text mb-0">Some more quick example text to build on the card title and make up
-                                the bulk of the card's content.</p>
-                        </div>
-                        <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                            <div class="d-flex align-items-end justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d"
-                                        alt="..." />
-                                    <div class="small">
-                                        <div class="fw-bold">Evelyn Martinez</div>
-                                        <div class="text-muted">April 2, 2021 &middot; 10 min read</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <!-- Call to action-->
             <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
