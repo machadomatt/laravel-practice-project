@@ -14,6 +14,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'slug' => str_slug($title),
         'title' => $title,
         'excerpt' => $faker->paragraph(2),
+        'image' => 'images/image-' . $faker->numberBetween(1, 6) . '.jpg',
         'reading_time' => $faker->numberBetween(1, 12),
         'content' => $faker->paragraph(20),
         'author' => $userID,
