@@ -23,7 +23,14 @@ class WebController extends Controller
 
     public function about()
     {
-        return view('front.about');
+        $metatags = $this->seo->render(
+            env('APP_NAME') . ' - About',
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. A asperiores molestias dolorum temporibus.',
+            route('about'),
+            'https://dummyimage.com/1280x720/343a40/6c757d'
+        );
+
+        return view('front.about', ['metatags' => $metatags]);
     }
 
     public function contact()
