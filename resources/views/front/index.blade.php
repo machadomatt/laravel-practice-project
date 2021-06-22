@@ -79,7 +79,9 @@
                             development time when building new projects! Starting with a Bootstrap template just makes
                             things easier!"</div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                            <img class="rounded-circle me-3" width="40" height="40"
+                                src="{{ Storage::url(Cropper::thumb('images/profile-image-1.jpg', 40, 40)) }}"
+                                alt="..." />
                             <div class="fw-bold">
                                 Tom Ato
                                 <span class="fw-bold text-primary mx-1">/</span>
@@ -115,15 +117,27 @@
                                     {{ $post->category()->get()->first()->name }}</div>
                                 <a class="text-decoration-none link-dark stretched-link"
                                     href="{{ route('post', $post->slug) }}">
-                                    <h5 class="card-title mb-3">{{ $post->title }}</h5>
+                                    <h3 class=" h5 card-title mb-3">{{ $post->title }}</h3>
                                 </a>
                                 <p class="card-text mb-0">{{ $post->excerpt }}</p>
                             </div>
                             <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                                 <div class="d-flex align-items-end justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <img class="rounded-circle me-3"
-                                            src="{{ Storage::url(Cropper::thumb($post->author()->get()->first()->profile_image, 40, 40)) }}"
+                                        @php
+                                            $userProfileImage = Storage::url(
+                                                Cropper::thumb(
+                                                    $post
+                                                        ->author()
+                                                        ->get()
+                                                        ->first()->profile_image,
+                                                    40,
+                                                    40,
+                                                ),
+                                            );
+                                        @endphp
+                                        <img class="rounded-circle me-3" width="40" height="40"
+                                            src="{{ $userProfileImage }}"
                                             alt="{{ $post->author()->get()->first()->name }}" />
                                         <div class="small">
                                             <div class="fw-bold">{{ $post->author()->get()->first()->name }}</div>
