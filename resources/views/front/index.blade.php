@@ -22,8 +22,8 @@
                     </div>
                 </div>
                 <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5"
-                        src="{{ Storage::url(Cropper::thumb('images/image-3.jpg', 600, 400)) }}" alt="Laravel + Bootstrap 5"
-                        width="600" height="400" loading="lazy" /></div>
+                        src="{{ Storage::url(Cropper::thumb('images/image-3.jpg', 600, 400)) }}"
+                        alt="Laravel + Bootstrap 5" width="600" height="400" loading="lazy" /></div>
             </div>
         </div>
     </header>
@@ -111,7 +111,8 @@
                                 src="{{ Storage::url(Cropper::thumb($post->image, 600, 350)) }}"
                                 alt="{{ $post->title }}" loading="lazy" width="600" height="350" />
                             <div class="card-body p-4">
-                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ $post->category()->get()->first()->name }}</div>
+                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">
+                                    {{ $post->category()->get()->first()->name }}</div>
                                 <a class="text-decoration-none link-dark stretched-link"
                                     href="{{ route('post', $post->slug) }}">
                                     <h5 class="card-title mb-3">{{ $post->title }}</h5>
@@ -121,7 +122,8 @@
                             <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
                                 <div class="d-flex align-items-end justify-content-between">
                                     <div class="d-flex align-items-center">
-                                        <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d"
+                                        <img class="rounded-circle me-3"
+                                            src="{{ Storage::url(Cropper::thumb($post->author()->get()->first()->profile_image, 40, 40)) }}"
                                             alt="{{ $post->author()->get()->first()->name }}" />
                                         <div class="small">
                                             <div class="fw-bold">{{ $post->author()->get()->first()->name }}</div>
