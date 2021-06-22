@@ -111,7 +111,7 @@
                                 src="{{ Storage::url(Cropper::thumb($post->image, 600, 350)) }}"
                                 alt="{{ $post->title }}" loading="lazy" width="600" height="350" />
                             <div class="card-body p-4">
-                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ $post->category }}</div>
+                                <div class="badge bg-primary bg-gradient rounded-pill mb-2">{{ $post->category()->get()->first()->name }}</div>
                                 <a class="text-decoration-none link-dark stretched-link"
                                     href="{{ route('post', $post->slug) }}">
                                     <h5 class="card-title mb-3">{{ $post->title }}</h5>
@@ -122,7 +122,7 @@
                                 <div class="d-flex align-items-end justify-content-between">
                                     <div class="d-flex align-items-center">
                                         <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d"
-                                            alt="{{ $post->author }}" />
+                                            alt="{{ $post->author()->get()->first()->name }}" />
                                         <div class="small">
                                             <div class="fw-bold">{{ $post->author()->get()->first()->name }}</div>
                                             <div class="text-muted">
