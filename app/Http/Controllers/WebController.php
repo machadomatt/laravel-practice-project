@@ -53,9 +53,10 @@ class WebController extends Controller
         return view('front.blog');
     }
 
-    public function post()
+    public function post(Request $request)
     {
-        return view('front.post');
+        $post = Post::where('slug', $request->slug)->first();
+        return view('front.post', ['post' => $post]);
     }
 
     public function sendContact()
