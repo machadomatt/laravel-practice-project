@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Support\Cropper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class WebController extends Controller
 {
@@ -59,7 +61,15 @@ class WebController extends Controller
     public function post(Request $request)
     {
         $post = Post::where('slug', $request->slug)->first();
-        return view('front.post', ['post' => $post]);
+
+        $metatags = $this->seo->render(
+            env('APP_NAME') . ' - ' . $post->title,
+            $post->excerpt,
+            route('post', $post->slug),
+            Storage::url(Cropper::thumb($post->image, 1280, 720))
+        );
+
+        return view('front.post', ['post' => $post, 'metatags' => $metatags]);
     }
 
     public function sendContact()
