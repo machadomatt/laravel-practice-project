@@ -50,7 +50,10 @@ class WebController extends Controller
 
     public function blog()
     {
-        return view('front.blog');
+        $featuredPost = Post::orderBy('published_at', 'DESC')->first();
+        $news = Post::where('category', 1)->orderBy('published_at', 'DESC')->limit(3)->get();
+        $featuredStories = Post::orderBy('published_at', 'DESC')->limit(3)->get();
+        return view('front.blog', ['featuredPost' => $featuredPost, 'news' => $news, 'featuredStories' => $featuredStories]);
     }
 
     public function post(Request $request)
